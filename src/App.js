@@ -1,4 +1,5 @@
 // import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 const style = {
@@ -28,11 +29,11 @@ function App() {
     { name: 'photoshop', price: '$99.0' },
     { name: 'ilastator', price: '$10.99' },
     { name: 'PDF Reader', price: '$11.99' },
-    { name: 'ilastator-2', price: '$10.79' },
-    { name: 'ilastator-3', price: '$10.99' },
+    { name: 'ilastator-4', price: '$99' },
   ]
 
   const friends = [
+    { name: 'lablu', id: '99' },
     { name: 'hablu', id: '01' },
     { name: 'kablu', id: '02' },
     { name: 'lablu', id: '99' },
@@ -62,6 +63,8 @@ function App() {
         {/* <p>Git setup done</p>
         <p>My First Paragraph</p> */}
         <h3>Testing React</h3>
+        <Counter></Counter>
+        <Users></Users>
 
         <ul>
           {
@@ -79,6 +82,9 @@ function App() {
         </ul>
         {
           products.map(productsList => <Product Product={productsList}></Product>)
+        }
+        {
+          friends.map(friendsList => <Friend Friend={friendsList}></Friend>)
         }
 
         {/* {
@@ -98,6 +104,47 @@ function App() {
     </div>
   );
 }
+
+function Counter() {
+  const [count, setCount] = useState(10);
+  // const handleButton = () => {
+  //   const newCount = count + 1;
+  //   setCount(newCount);
+  // };
+  const handleButton = () => setCount(count + 1);
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setCount(count - 1)}>-</button>
+
+      {/* <button onClick={handleButton}>Click</button> */}
+      <button onClick={() => setCount(count + 1)}>+</button>
+
+
+    </div>
+  )
+}
+
+function Users() {
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    // console.log('Calling Effect');
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(response => response.json())
+      .then(data => setUsers(data))
+  }, [])
+  return (
+    <div>
+      <h3>Dynamic Users: {users.length}</h3>
+      <ul>
+        {
+          users.map(user => <li>{user.name}</li>)
+        }
+      </ul>
+    </div>
+  )
+}
+
 
 // function Nayok(ress){
 
@@ -144,7 +191,7 @@ function Friend(props) {
     border: '1px solid blue',
     borderRadius: '5px',
     backgroundColor: 'pink',
-    height: '300px',
+    height: '200px',
     width: '300px',
     float: 'left',
   }
@@ -156,12 +203,8 @@ function Friend(props) {
   // console.log(props);
   return (
     <div style={friendsStyle}>
-
       <h1>{name}</h1>
       <h3>{id}</h3>
-      <h1></h1>
-      <button>Buy Now</button>
-
     </div>
   )
 
