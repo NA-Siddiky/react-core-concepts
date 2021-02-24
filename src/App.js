@@ -163,6 +163,8 @@ function Product(info) {
   }
 
   const { name, price } = info.Product;
+  // console.log(info.Product);
+  console.log(name);
   // console.log(name, price);
 
 
