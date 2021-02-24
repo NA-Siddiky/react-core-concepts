@@ -201,7 +201,6 @@ function Friend(props) {
   const { name, id } = props.Friend;
   // console.log(name, id);
 
-
   // console.log(props);
   return (
     <div style={friendsStyle}>
